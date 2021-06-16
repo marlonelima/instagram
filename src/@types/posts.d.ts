@@ -1,6 +1,6 @@
 export interface INewPost {
   user_id: string
-  image_url: string
+  filename: string
   description?: string
 }
 

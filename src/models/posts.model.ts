@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  image_url: {
+  filename: {
     type: String,
     required: true
   },

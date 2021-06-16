@@ -11,6 +11,15 @@ const PostsService = {
   async create(post: INewPost) {
     const newPost = await Post.create(post)
     return newPost
+  },
+
+  async get(id: string) {
+    const post = await Post.findOne({ _id: id })
+    return post
+  },
+
+  async delete(id: string) {
+    const post = await Post.deleteOne({ _id: id })
   }
 }
 

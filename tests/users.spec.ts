@@ -1,8 +1,7 @@
 import supertest from 'supertest'
 import faker from 'faker'
 
-import { describe, it, expect } from '@jest/globals'
-import api from '../../src/app'
+import api from '../src/app'
 
 const app = supertest(api)
 

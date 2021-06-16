@@ -19,7 +19,9 @@
         "jsonwebtoken": "^8.5.1",
         "mongodb": "^3.6.9",
         "mongoose": "^5.12.13",
+        "multer": "^1.4.2",
         "redis": "^3.1.2",
+        "uuid": "^8.3.2",
         "yup": "^0.32.9"
     },
     "devDependencies": {
@@ -32,8 +34,10 @@
         "@types/faker": "^5.5.6",
         "@types/jest": "^26.0.23",
         "@types/jsonwebtoken": "^8.5.1",
+        "@types/multer": "^1.4.5",
         "@types/node": "^15.12.2",
         "@types/supertest": "^2.0.11",
+        "@types/uuid": "^8.3.0",
         "babel-jest": "^27.0.2",
         "coveralls-next": "^4.0.1",
         "eslint": "^7.28.0",
