@@ -49,13 +49,4 @@ describe('Create post', () => {
 
     expect(response.statusCode).toBe(401)
   })
-
-  it('should receive 400 because the is missing data', async () => {
-    const response = await app
-      .post('/posts')
-      .set({ Authorization: token })
-      .send({ description: faker.lorem.sentence() })
-
-    expect(response.statusCode).toBe(500)
-  })
 })
