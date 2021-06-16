@@ -8,7 +8,7 @@ import routes from './routes'
 import errorsHandler from './errors'
 
 dotenv.config({
-  path: process.env.NODE_ENV === 'production' ? '.env' : '.env.test'
+  path: '.env.test'
 })
 const app = express()
 

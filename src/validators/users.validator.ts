@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-export const UsersValidator = {
+const UsersValidator = {
   create: Yup.object().shape({
     full_name: Yup.string()
       .required('Você não informou o seu nome!')
@@ -30,3 +30,5 @@ export const UsersValidator = {
     password: Yup.string().min(8, 'A senha deve conter no mínimo 8 caracteres!')
   })
 }
+
+export default UsersValidator

@@ -1,3 +1,4 @@
 import UsersService from './users.service'
+import PostsService from './posts.service'
 
-export { UsersService }
+export { UsersService, PostsService }

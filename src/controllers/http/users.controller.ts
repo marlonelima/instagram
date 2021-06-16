@@ -2,7 +2,7 @@ import bcrypt, { genSaltSync } from 'bcrypt'
 import { Request, Response } from 'express'
 
 import { UsersService } from '../../services'
-import { UsersValidator } from '../../validators/users.validator'
+import { UsersValidator } from '../../validators'
 
 import { MyError } from '../../errors'
 

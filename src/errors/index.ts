@@ -1,6 +1,7 @@
 import { ErrorRequestHandler } from 'express'
 import { JsonWebTokenError } from 'jsonwebtoken'
 import { ValidationError } from 'yup'
+import { Error as MongoError } from 'mongoose'
 
 interface ValidationErrors {
   [key: string]: string[]
@@ -35,7 +36,9 @@ const errorsHandler: ErrorRequestHandler = (err, req, res, next) => {
       .json({ message: 'Você não tem permissão para isso!' })
   }
 
-  return console.log(err)
+  return res
+    .status(500)
+    .json({ message: 'Algo deu errado com a sua requisição!' })
 }
 
 export default errorsHandler

@@ -9,45 +9,28 @@ import { IToken } from '../@types/token'
 
 const UsersService = {
   async create(userData: IUser) {
-    try {
-      const newUserData = await User.create(userData)
-      return newUserData
-    } catch (err) {
-      console.log(err)
-      throw new MyError('Algo deu errado ao criar um novo usuário!', 400)
-    }
+    const newUserData = await User.create(userData)
+    return newUserData
   },
 
   async login(username: string) {
-    try {
-      const userData = await User.findOne({ username })
-      return userData
-    } catch (err) {
-      throw new MyError(err.message, 500)
-    }
+    const userData = await User.findOne({ username })
+    return userData
   },
 
   async update(id: string, updatedData: IUser) {
-    try {
-      const userData = await User.findOneAndUpdate(
-        { _id: id },
-        { $set: updatedData },
-        { new: true }
-      )
+    const userData = await User.findOneAndUpdate(
+      { _id: id },
+      { $set: updatedData },
+      { new: true }
+    )
 
-      return userData
-    } catch (err) {
-      throw new MyError(err.message, 500)
-    }
+    return userData
   },
 
   async delete(id: string) {
-    try {
-      await User.deleteOne({ _id: id })
-      return true
-    } catch (err) {
-      throw new MyError(err.message, 500)
-    }
+    await User.deleteOne({ _id: id })
+    return true
   },
 
   async exists(username: string) {
