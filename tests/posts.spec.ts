@@ -91,7 +91,7 @@ describe('Delete post', () => {
     expect(response.statusCode).toBe(400)
   })
 
-  it('should receive 400 because is missing the post_id', async () => {
+  it('should receive 500 because the post_id is wrong', async () => {
     const response = await app
       .delete('/posts')
       .set({ Authorization: token })
