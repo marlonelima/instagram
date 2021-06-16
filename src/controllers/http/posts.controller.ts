@@ -5,9 +5,6 @@ import { PostsValidator } from '../../validators'
 
 import { MyError } from '../../errors'
 
-import multer from 'multer'
-const upload = multer({ dest: '/uploads/images' })
-
 const PostsController = {
   async create(req: Request, res: Response) {
     if (!req.headers.authorization)
