@@ -35,6 +35,7 @@ const errorsHandler: ErrorRequestHandler = (err, req, res, next) => {
       .status(401)
       .json({ message: 'Você não tem permissão para isso!' })
   }
+
   console.log(err)
   return res
     .status(500)

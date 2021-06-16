@@ -17,7 +17,6 @@ async function signupAndLoginGetToken() {
   const login = await app
     .post('/users')
     .send({ email, full_name, username, password })
-  console.log(login.body.token)
   return login.body.token
 }
 
@@ -90,6 +89,15 @@ describe('Delete post', () => {
     const response = await app.delete('/posts').set({ Authorization: token })
 
     expect(response.statusCode).toBe(400)
+  })
+
+  it('should receive 400 because is missing the post_id', async () => {
+    const response = await app
+      .delete('/posts')
+      .set({ Authorization: token })
+      .set({ post_id: 'invalid_post_id' })
+
+    expect(response.statusCode).toBe(500)
   })
 
   it('should receive 401 because authorization is missing', async () => {
