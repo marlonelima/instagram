@@ -29,7 +29,8 @@ const errorsHandler: ErrorRequestHandler = (err, req, res, next) => {
     return res.status(400).json({ message: 'VALIDATION_FAILED', errors })
   }
 
-  return res.status(401).json({ message: 'Sem permissões!' })
+  return res
+    .status(401)
+    .json({ message: 'Algo deu errado com a sua  requisição' })
 }
-
 export default errorsHandler
