@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 2
 
       - name: Essentials in Docker Compose
-        run: docker-compose -f docker-essentials.yml up --build -d
+        run: docker-compose -f docker-test.yml up --build -d
 
       - name: Installing dependencies
         run: yarn install
