@@ -2,26 +2,17 @@ import supertest from 'supertest'
 import faker from 'faker'
 
 import api from '../src/app'
-import path from 'path'
+
+import { signupAndLoginGetToken } from './helpers/functions'
+import User from '../src/models/users.model'
+import mongoose from '../src/config/database'
 
 const app = supertest(api)
 
 let token: string
 
-async function signupAndLoginGetToken() {
-  const email = faker.internet.email()
-  const full_name = faker.name.findName()
-  const username = faker.internet.userName()
-  const password = faker.internet.password()
-
-  const login = await app
-    .post('/users')
-    .send({ email, full_name, username, password })
-  return login.body.token
-}
-
 beforeAll(async () => {
-  token = await signupAndLoginGetToken()
+  token = await signupAndLoginGetToken(app)
 })
 
 let post_id: string
@@ -71,7 +62,7 @@ describe('Delete post', () => {
   it('should receive 401 because authorization doenst match', async () => {
     const response = await app
       .delete('/posts')
-      .set({ Authorization: await signupAndLoginGetToken() })
+      .set({ Authorization: await signupAndLoginGetToken(app) })
       .set({ post_id })
 
     expect(response.statusCode).toBe(401)

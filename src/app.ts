@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import routes from './routes'
 
 import errorsHandler from './errors'
-import path from 'path'
+
 dotenv.config()
 const app = express()
 

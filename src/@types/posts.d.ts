@@ -4,10 +4,7 @@ export interface INewPost {
   description?: string
 }
 
-export interface IPosts {
-  user_id?: string
-  image_url?: string
-  description?: string
+export interface IPosts extends INewPost {
   likes?: number
   comments?: number
 }
