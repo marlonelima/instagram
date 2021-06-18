@@ -19,14 +19,23 @@ let post_id: string
 
 describe('Create post', () => {
   it('should send a new post', async () => {
+    const description = faker.lorem.sentence()
     const response = await app
       .post('/posts')
       .set({ Authorization: token })
-      .field('description', faker.lorem.sentence())
+      .field('description', description)
       .attach('file', './tests/fixtures/post_image.png')
 
     post_id = response.body.id
     expect(response.statusCode).toBe(201)
+    expect(response.body.description).toBe(description)
+    expect(response.body).toHaveProperty('id')
+    expect(response.body).toHaveProperty('user_id')
+    expect(response.body).toHaveProperty('filename')
+    expect(response.body).toHaveProperty('likes')
+    expect(response.body).toHaveProperty('comments')
+    expect(response.body).toHaveProperty('created_at')
+    expect(response.body).toHaveProperty('updated_at')
   })
 
   it('should receive 400 because the extension image is invalid', async () => {

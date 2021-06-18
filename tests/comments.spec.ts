@@ -17,12 +17,15 @@ beforeAll(async () => {
 
 describe('Create comment', () => {
   it('should create a comment successfully', async () => {
+    const comment = faker.lorem.sentence()
     const response = await app
       .post('/comments')
       .set({ Authorization: token })
-      .send({ comment: faker.lorem.sentence(), post_id })
+      .send({ comment, post_id })
 
     expect(response.statusCode).toBe(201)
+    expect(response.body.comment).toBe(comment)
+    expect(response.body).toHaveProperty('id')
   })
 
   it('should not authorize because the token is missing', async () => {
