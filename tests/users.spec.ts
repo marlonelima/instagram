@@ -96,7 +96,7 @@ describe('Login user', () => {
       .post('/users/login')
       .send({ username: `${Math.random()}`, password })
 
-    expect(response.statusCode).toBe(401)
+    expect(response.statusCode).toBe(404)
   })
 
   it('should receive status 401 because the password is invalid', async () => {

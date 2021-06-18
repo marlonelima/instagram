@@ -97,7 +97,7 @@ describe('Delete post', () => {
       .set({ Authorization: token })
       .set({ post_id: 'invalid_post_id' })
 
-    expect(response.statusCode).toBe(500)
+    expect(response.statusCode).toBe(404)
   })
 
   it('should receive 401 because authorization is missing', async () => {

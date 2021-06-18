@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 
 import { UsersService } from '../../services'
 import { UsersValidator } from '../../validators'
+import { TokenManager } from '../../utils/token'
 
 import { MyError } from '../../errors'
 
@@ -23,7 +24,7 @@ const UsersController = {
       password
     })
 
-    const token = await UsersService.generateJWT(userData._id)
+    const token = await TokenManager.generateJWT(userData._id)
 
     return res.status(201).json({
       email: userData.email,
@@ -43,12 +44,12 @@ const UsersController = {
     const { username, password } = req.body
 
     const userData = await UsersService.login(username)
-    if (!userData) throw new MyError('Usuário ou senha inválido!', 401)
+    if (!userData) throw new MyError('Usuário inválido!', 404)
 
     const matchPassword = await bcrypt.compare(password, userData.password)
-    if (!matchPassword) throw new MyError('Usuário ou senha inválido!', 401)
+    if (!matchPassword) throw new MyError('Senha inválida!', 401)
 
-    const token = await UsersService.generateJWT(userData._id)
+    const token = await TokenManager.generateJWT(userData._id)
 
     return res.status(200).json({
       email: userData.email,
@@ -73,7 +74,7 @@ const UsersController = {
         401
       )
 
-    const { id } = await UsersService.verifyAndDecodeJWT(
+    const { id } = await TokenManager.verifyAndDecodeJWT(
       req.headers.authorization
     )
 
@@ -83,7 +84,7 @@ const UsersController = {
 
     const userData = await UsersService.update(id, userUpdatedData)
 
-    const token = await UsersService.generateJWT(userData._id)
+    const token = await TokenManager.generateJWT(userData._id)
 
     return res.status(200).json({
       email: userData.email,
@@ -104,7 +105,7 @@ const UsersController = {
         401
       )
 
-    const { id } = await UsersService.verifyAndDecodeJWT(
+    const { id } = await TokenManager.verifyAndDecodeJWT(
       req.headers.authorization
     )
 

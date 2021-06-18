@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
 
-import { UsersService, PostsService } from '../../services'
+import { PostsService } from '../../services'
 import { PostsValidator } from '../../validators'
+import { TokenManager } from '../../utils/token'
 
 import { MyError } from '../../errors'
 
@@ -18,7 +19,7 @@ const PostsController = {
     if (!req.file)
       throw new MyError('Impossível prosseguir sem uma imagem!', 400)
 
-    const { id: user_id } = await UsersService.verifyAndDecodeJWT(
+    const { id: user_id } = await TokenManager.verifyAndDecodeJWT(
       req.headers.authorization
     )
 
@@ -54,7 +55,7 @@ const PostsController = {
     if (!req.headers.post_id)
       throw new MyError('Você não informou o id do post!', 400)
 
-    const { id: user_id } = await UsersService.verifyAndDecodeJWT(
+    const { id: user_id } = await TokenManager.verifyAndDecodeJWT(
       req.headers.authorization
     )
 

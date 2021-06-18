@@ -6,10 +6,8 @@ import dotenv from 'dotenv'
 import routes from './routes'
 
 import errorsHandler from './errors'
-
-dotenv.config({
-  path: '.env.test'
-})
+import path from 'path'
+dotenv.config()
 const app = express()
 
 app.use(cors())

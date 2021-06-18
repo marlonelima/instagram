@@ -1,11 +1,8 @@
-import jwt from 'jsonwebtoken'
-
 import User from '../models/users.model'
 
 import { MyError } from '../errors'
 
 import IUser from '../@types/user'
-import { IToken } from '../@types/token'
 
 const UsersService = {
   async create(userData: IUser) {
@@ -30,7 +27,7 @@ const UsersService = {
 
   async delete(id: string) {
     await User.deleteOne({ _id: id })
-    return true
+    return
   },
 
   async exists(username: string) {
@@ -43,18 +40,6 @@ const UsersService = {
       )
 
     return
-  },
-
-  async generateJWT(id: string) {
-    const token = jwt.sign({ id }, <string>process.env.PRIVATE_KEY, {
-      expiresIn: '15m'
-    })
-    return token
-  },
-
-  async verifyAndDecodeJWT(token: string) {
-    const decoded = <IToken>jwt.verify(token, <string>process.env.PRIVATE_KEY)
-    return decoded
   }
 }
 
