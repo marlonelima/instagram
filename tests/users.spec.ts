@@ -155,13 +155,13 @@ describe('Update user', () => {
     expect(response.statusCode).toBe(401)
   })
 
-  it('should receive 401 because the token is invalid', async () => {
+  it('should receive 400 because the token is invalid', async () => {
     const response = await app
       .put('/users')
       .set({ Authorization: 'invalid-token' })
       .send({ username: faker.internet.userName() })
 
-    expect(response.statusCode).toBe(401)
+    expect(response.statusCode).toBe(400)
   })
 
   it('should receive 400 because the username is too short', async () => {
@@ -190,12 +190,12 @@ describe('Delete user', () => {
     expect(response.statusCode).toBe(202)
   })
 
-  it('should receive 401 because the token is invalid', async () => {
+  it('should receive 400 because the token is invalid', async () => {
     const response = await app
       .delete('/users')
       .set({ Authorization: 'invalid-token' })
 
-    expect(response.statusCode).toBe(401)
+    expect(response.statusCode).toBe(400)
   })
 
   it('should receive 401 because the token is missing', async () => {

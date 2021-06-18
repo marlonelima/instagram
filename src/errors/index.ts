@@ -31,6 +31,6 @@ const errorsHandler: ErrorRequestHandler = (err, req, res, next) => {
 
   return res
     .status(400)
-    .json({ message: 'Algo deu errado com a sua  requisição' })
+    .json({ message: 'Algo deu errado com a sua requisição' })
 }
 export default errorsHandler
