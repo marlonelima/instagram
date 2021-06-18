@@ -36,6 +36,10 @@ describe('Create post', () => {
     expect(response.body).toHaveProperty('comments')
     expect(response.body).toHaveProperty('created_at')
     expect(response.body).toHaveProperty('updated_at')
+    expect(response.body.filename).not.toBe(undefined)
+    expect(response.body.user_id).not.toBe(undefined)
+    expect(response.body.filename).not.toBe(null)
+    expect(response.body.user_id).not.toBe(null)
   })
 
   it('should receive 400 because the extension image is invalid', async () => {
