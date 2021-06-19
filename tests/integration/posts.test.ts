@@ -2,7 +2,7 @@ import supertest from 'supertest'
 import faker from 'faker'
 
 import app from '../../src/app'
-import { createPost, signupUser } from '../helpers/functions'
+import { createPost, signupUser } from '../helpers/create'
 
 const api = supertest(app)
 

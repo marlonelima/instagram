@@ -12,5 +12,6 @@ lerna-debug.log*
 yarn.lock
 
 public/images/**/*.jpg
+public/images/**/*.png
 
 

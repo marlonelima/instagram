@@ -3,7 +3,6 @@ import faker from 'faker'
 
 import { IUser } from '../../src/@types/user'
 import { IPosts } from '../../src/@types/posts'
-import { IComment } from '../../src/@types/comments'
 
 async function signupUser(api: SuperTest<Test>): Promise<IUser> {
   const email = faker.internet.email()
