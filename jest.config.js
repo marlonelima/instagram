@@ -1,6 +1,10 @@
 module.exports = {
     testEnvironment: 'node',
-    setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
+    setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
     collectCoverage: true,
-    collectCoverageFrom: ['src/**/*.ts']
+    collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+    coveragePathIgnorePatterns: [
+        '<rootDir>/src/config',
+        '<rootDir>/src/server.ts'
+    ]
 }

@@ -20,7 +20,7 @@ const PostsService = {
   },
 
   async delete(id: string) {
-    const post = await Post.deleteOne({ _id: id })
+    await Post.deleteOne({ _id: id })
   }
 }
 

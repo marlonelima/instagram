@@ -1,5 +1,5 @@
 import UsersService from './users.service'
 import PostsService from './posts.service'
-import CommentService from './comments.service'
+import CommentsService from './comments.service'
 
-export { UsersService, PostsService, CommentService }
+export { UsersService, PostsService, CommentsService }

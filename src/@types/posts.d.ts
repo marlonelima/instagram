@@ -5,6 +5,7 @@ export interface INewPost {
 }
 
 export interface IPosts extends INewPost {
-  likes?: number
-  comments?: number
+  id: string
+  likes: number
+  comments: number
 }

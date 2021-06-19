@@ -67,7 +67,7 @@ const PostsController = {
 
     await PostsService.delete(<string>req.headers.post_id)
 
-    return res.status(201).json({ message: 'Publicação apagada com sucesso!' })
+    return res.status(202).json({ message: 'Publicação apagada com sucesso!' })
   }
 }
 

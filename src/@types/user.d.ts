@@ -14,5 +14,5 @@ export interface IUser extends INewUser {
   private: boolean
   created_at: Date
   updated_at: Date
-  token?: string
+  token: string
 }

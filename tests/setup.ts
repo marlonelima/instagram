@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-import db from './tests/db'
+import db from './db'
 
 dotenv.config({ path: '.env.test' })
 
