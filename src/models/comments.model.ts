@@ -1,6 +1,6 @@
-import mongoose from '../config/database'
+import { Schema, model } from 'mongoose'
 
-const commentSchema = new mongoose.Schema({
+const commentSchema = new Schema({
   user_id: {
     type: String,
     required: true
@@ -19,6 +19,6 @@ const commentSchema = new mongoose.Schema({
   }
 })
 
-const Comment = mongoose.model('Comment', commentSchema)
+const Comment = model('Comment', commentSchema)
 
 export default Comment

@@ -1,7 +1,7 @@
 import supertest from 'supertest'
 import faker from 'faker'
 
-import api from '../src/app'
+import api from '../../src/app'
 
 const app = supertest(api)
 

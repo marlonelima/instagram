@@ -1,9 +1,9 @@
 import supertest from 'supertest'
 import faker from 'faker'
 
-import api from '../src/app'
+import api from '../../src/app'
 
-import { createPost, signupAndLoginGetToken } from './helpers/functions'
+import { createPost, signupAndLoginGetToken } from '../helpers/functions'
 
 const app = supertest(api)
 

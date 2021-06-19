@@ -1,22 +1,25 @@
 import { SuperTest, Test } from 'supertest'
 import faker from 'faker'
 
-async function signupAndLoginGetToken(app: SuperTest<Test>) {
+import { IUser } from '../../src/@types/user'
+
+async function signupUser(api: SuperTest<Test>): Promise<IUser> {
   const email = faker.internet.email()
   const full_name = faker.name.findName()
   const username = faker.internet.userName()
   const password = faker.internet.password()
 
-  const login = await app
+  const response = await api
     .post('/users')
     .send({ email, full_name, username, password })
-  return login.body.token
+
+  return response.body
 }
 
-async function createPost(app: SuperTest<Test>) {
-  const token = await signupAndLoginGetToken(app)
+async function createPost(api: SuperTest<Test>) {
+  const { token } = await signupUser(api)
 
-  const response = await app
+  const response = await api
     .post('/posts')
     .set({ Authorization: token })
     .field('description', faker.lorem.sentence())
@@ -26,4 +29,4 @@ async function createPost(app: SuperTest<Test>) {
   return post_id
 }
 
-export { signupAndLoginGetToken, createPost }
+export { signupUser }

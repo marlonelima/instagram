@@ -2,20 +2,20 @@ import User from '../models/users.model'
 
 import { MyError } from '../errors'
 
-import IUser from '../@types/user'
+import { INewUser, IUser } from '../@types/user'
 
 const UsersService = {
-  async create(userData: IUser) {
+  async create(userData: INewUser): Promise<IUser> {
     const newUserData = await User.create(userData)
     return newUserData
   },
 
-  async login(username: string) {
+  async login(username: string): Promise<IUser> {
     const userData = await User.findOne({ username })
     return userData
   },
 
-  async update(id: string, updatedData: IUser) {
+  async update(id: string, updatedData: IUser): Promise<IUser> {
     const userData = await User.findOneAndUpdate(
       { _id: id },
       { $set: updatedData },

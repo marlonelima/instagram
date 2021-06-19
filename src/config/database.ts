@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
-mongoose.connect(process.env.DATABASE_URL!, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-})
-mongoose.Promise = global.Promise
-
-export default mongoose
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(process.env.DATABASE_URL!, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  mongoose.Promise = global.Promise
+}

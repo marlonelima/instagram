@@ -1,5 +1,6 @@
 module.exports = {
     testEnvironment: 'node',
     setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
-    collectCoverage: true
+    collectCoverage: true,
+    collectCoverageFrom: ['src/**/*.ts']
 }

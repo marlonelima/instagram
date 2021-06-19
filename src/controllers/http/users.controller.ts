@@ -32,6 +32,9 @@ const UsersController = {
       username: userData.username,
       bio: userData.bio,
       website: userData.website,
+      followers: userData.followers,
+      following: userData.following,
+      private: userData.private,
       created_at: userData.created_at,
       updated_at: userData.updated_at,
       token
@@ -57,6 +60,9 @@ const UsersController = {
       username: userData.username,
       bio: userData.bio,
       website: userData.website,
+      followers: userData.followers,
+      following: userData.following,
+      private: userData.private,
       created_at: userData.created_at,
       updated_at: userData.updated_at,
       token

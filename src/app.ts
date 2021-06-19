@@ -7,6 +7,8 @@ import routes from './routes'
 
 import errorsHandler from './errors'
 
+import './config/database'
+
 dotenv.config()
 const app = express()
 

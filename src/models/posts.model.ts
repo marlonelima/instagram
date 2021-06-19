@@ -1,6 +1,6 @@
-import mongoose from '../config/database'
+import { Schema, model } from 'mongoose'
 
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
   user_id: {
     type: String,
     required: true,
@@ -32,6 +32,6 @@ const postSchema = new mongoose.Schema({
   }
 })
 
-const Post = mongoose.model('Post', postSchema)
+const Post = model('Post', postSchema)
 
 export default Post

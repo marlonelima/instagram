@@ -1,11 +1,11 @@
 import supertest from 'supertest'
 import faker from 'faker'
 
-import api from '../src/app'
+import api from '../../src/app'
 
-import { signupAndLoginGetToken } from './helpers/functions'
-import User from '../src/models/users.model'
-import mongoose from '../src/config/database'
+import { signupAndLoginGetToken } from '../helpers/functions'
+import User from '../../src/models/users.model'
+import mongoose from '../../src/config/database'
 
 const app = supertest(api)
 

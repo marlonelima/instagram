@@ -1,6 +1,6 @@
-import mongoose from '../config/database'
+import { Schema, model } from 'mongoose'
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -26,6 +26,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  followers: {
+    type: Number,
+    default: 0
+  },
+  following: {
+    type: Number,
+    default: 0
+  },
+  private: {
+    type: Boolean,
+    default: false
+  },
   created_at: {
     type: Date,
     default: Date.now()
@@ -36,6 +48,6 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-const User = mongoose.model('User', userSchema)
+const User = model('User', userSchema)
 
 export default User

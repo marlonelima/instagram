@@ -1,8 +1,11 @@
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-dotenv.config({ path: './.env.test' })
+import db from './tests/db'
 
-afterAll(async () => {
-  await mongoose.connection.close()
-})
+dotenv.config({ path: '.env.test' })
+
+beforeAll(async () => await db.connect())
+
+beforeEach(async () => await db.clearDatabase())
+
+afterAll(async () => await db.closeDatabase())
