@@ -29,7 +29,12 @@ const errorsHandler: ErrorRequestHandler = (err, req, res, next) => {
     return res.status(400).json({ message: 'VALIDATION_FAILED', errors })
   }
 
+  if (err instanceof JsonWebTokenError)
+    return res
+      .status(401)
+      .send({ message: 'Você não tem permissão para isso!' })
+
   //unknown errors and jwt invalid
-  return res.status(401).json({ message: 'Algo não parece certo!' })
+  return res.status(500).json({ message: 'Algo não parece certo!' })
 }
 export default errorsHandler

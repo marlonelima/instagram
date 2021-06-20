@@ -5,6 +5,7 @@ module.exports = {
     collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
     coveragePathIgnorePatterns: [
         '<rootDir>/src/config',
-        '<rootDir>/src/server.ts'
+        '<rootDir>/src/server.ts',
+        '<rootDir>/src/errors/index.ts'
     ]
 }

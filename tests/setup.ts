@@ -8,4 +8,6 @@ beforeAll(async () => await db.connect())
 
 beforeEach(async () => await db.clearDatabase())
 
-afterAll(async () => await db.closeDatabase())
+afterAll(async () => {
+  await db.closeDatabase()
+})
