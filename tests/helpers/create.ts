@@ -22,7 +22,7 @@ async function createPost(api: SuperTest<Test>): Promise<IPosts> {
 
   const response = await api
     .post('/posts')
-    .set({ Authorization: token })
+    .set({ Authorization: `Bearer ${token}` })
     .field('description', faker.lorem.sentence())
     .attach('file', './tests/fixtures/post_image.png')
 
@@ -34,13 +34,13 @@ async function createPost(api: SuperTest<Test>): Promise<IPosts> {
 async function createComment(api: SuperTest<Test>, token: string) {
   const post = await api
     .post('/posts')
-    .set({ Authorization: token })
+    .set({ Authorization: `Bearer ${token}` })
     .field('description', faker.lorem.sentence())
     .attach('file', './tests/fixtures/post_image.png')
 
   const response = await api
     .post('/comments')
-    .set({ Authorization: token })
+    .set({ Authorization: `Bearer ${token}` })
     .send({
       post_id: post.body.id,
       comment: faker.lorem.sentence()

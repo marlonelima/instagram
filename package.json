@@ -4,7 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "test": "jest",
+        "test": "cross-env NODE_ENV=test jest",
         "dev": "tsnd --poll --respawn --transpile-only src/server.ts",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "start": "NODE_ENV=production node dist/server.js",
@@ -13,10 +13,12 @@
     "dependencies": {
         "bcrypt": "^5.0.1",
         "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "express-async-errors": "^3.1.1",
         "jsonwebtoken": "^8.5.1",
+        "mongodb": "^3.6.9",
         "mongoose": "^5.12.13",
         "multer": "^1.4.2",
         "redis": "^3.1.2",

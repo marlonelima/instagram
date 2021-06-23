@@ -1,8 +1,8 @@
 import bcrypt, { genSaltSync } from 'bcrypt'
 import { Request, Response } from 'express'
 
-import { UsersService } from '../../services'
-import { UsersValidator } from '../../validators'
+import UsersService from '../../services/users.service'
+import UsersValidator from '../../validators/users.validator'
 import { TokenManager } from '../../utils/token'
 
 import { MyError } from '../../errors'
@@ -74,15 +74,7 @@ const UsersController = {
 
     let userUpdatedData = req.body
 
-    if (!req.headers.authorization)
-      throw new MyError(
-        'Você não tem permissão para isso. O token não foi informado!',
-        401
-      )
-
-    const { id } = await TokenManager.verifyAndDecodeJWT(
-      req.headers.authorization
-    )
+    const { id } = res.locals.token_payload
 
     const { password } = userUpdatedData
     if (password)
@@ -105,15 +97,7 @@ const UsersController = {
   },
 
   async delete(req: Request, res: Response) {
-    if (!req.headers.authorization)
-      throw new MyError(
-        'Você não tem permissão para isso. O token não foi informado!',
-        401
-      )
-
-    const { id } = await TokenManager.verifyAndDecodeJWT(
-      req.headers.authorization
-    )
+    const { id } = res.locals.token_payload
 
     await UsersService.delete(id)
 

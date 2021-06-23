@@ -34,7 +34,7 @@ const errorsHandler: ErrorRequestHandler = (err, req, res, next) => {
       .status(401)
       .send({ message: 'Você não tem permissão para isso!' })
 
-  //unknown errors and jwt invalid
+  //unknown errors
   return res.status(500).json({ message: 'Algo não parece certo!' })
 }
 export default errorsHandler

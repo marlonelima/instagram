@@ -1,28 +1,20 @@
 import { Request, Response } from 'express'
 
-import { CommentsValidator } from '../../validators'
+import CommentsService from '../../services/comments.service'
+import CommentsValidator from '../../validators/comments.validator'
 import { TokenManager } from '../../utils/token'
-import { CommentsService } from '../../services'
 
 import { MyError } from '../../errors'
 
-import { IComment, INewComment } from './../../@types/comments.d'
+import { INewComment } from './../../@types/comments.d'
 
 const CommentsController = {
   async create(req: Request, res: Response) {
-    if (!req.headers.authorization)
-      throw new MyError(
-        'Você não tem permissão para isso. O token não foi informado!',
-        401
-      )
-
     await CommentsValidator.create.validate(req.body, { abortEarly: false })
 
     const newComment: INewComment = req.body
 
-    const { id: user_id } = await TokenManager.verifyAndDecodeJWT(
-      req.headers.authorization
-    )
+    const { id: user_id } = res.locals.token_payload
 
     const comment = await CommentsService.create({
       comment: newComment.comment,
@@ -39,18 +31,10 @@ const CommentsController = {
   },
 
   async delete(req: Request, res: Response) {
-    if (!req.headers.authorization)
-      throw new MyError(
-        'Você não tem permissão para isso. O token não foi informado!',
-        401
-      )
-
     if (!req.headers.comment_id)
       throw new MyError('Você não informou o id do comentário!', 400)
 
-    const { id: user_id } = await TokenManager.verifyAndDecodeJWT(
-      req.headers.authorization
-    )
+    const { id: user_id } = res.locals.token_payload
 
     const comment = await CommentsService.get(<string>req.headers.comment_id)
 

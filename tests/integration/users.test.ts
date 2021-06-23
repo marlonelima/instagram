@@ -80,7 +80,7 @@ describe('Update user', () => {
 
     const response = await api
       .put('/users')
-      .set({ Authorization: user.token })
+      .set({ Authorization: `Bearer ${user.token}` })
       .send({
         email: faker.internet.email(),
         full_name: faker.name.findName(),
@@ -121,7 +121,7 @@ describe('Update user', () => {
 
     const response = await api
       .put('/users')
-      .set({ Authorization: user.token })
+      .set({ Authorization: `Bearer ${user.token}` })
       .send({
         password: '1234'
       })
@@ -136,7 +136,7 @@ describe('Update user', () => {
 
     const response = await api
       .put('/users')
-      .set({ Authorization: user.token })
+      .set({ Authorization: `Bearer ${user.token}` })
       .send({
         username: newUserName
       })
@@ -151,7 +151,7 @@ describe('Update user', () => {
 
     const response = await api
       .put('/users')
-      .set({ Authorization: user.token })
+      .set({ Authorization: `Bearer ${user.token}` })
       .send({
         full_name: newFullName
       })
@@ -166,7 +166,7 @@ describe('Update user', () => {
 
     const response = await api
       .put('/users')
-      .set({ Authorization: user.token })
+      .set({ Authorization: `Bearer ${user.token}` })
       .send({
         email: newEmail
       })
@@ -234,14 +234,12 @@ describe('Delete user', () => {
 
     const response = await api
       .delete('/users')
-      .set({ Authorization: user.token })
+      .set({ Authorization: `Bearer ${user.token}` })
 
     expect(response.statusCode).toBe(202)
   })
 
   it('should not delete user because the token is invalid', async () => {
-    const user = await signupUser(api)
-
     const response = await api
       .delete('/users')
       .set({ Authorization: 'invalid-token' })
@@ -250,8 +248,6 @@ describe('Delete user', () => {
   })
 
   it('should not delete user because the token is missing', async () => {
-    const user = await signupUser(api)
-
     const response = await api.delete('/users')
 
     expect(response.statusCode).toBe(401)

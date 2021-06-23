@@ -9,7 +9,9 @@ import errorsHandler from './errors'
 
 import './config/database'
 
-dotenv.config()
+dotenv.config({
+  path: process.env.NODE_ENV === 'production' ? '.env' : '.env.test'
+})
 const app = express()
 
 app.use(cors())

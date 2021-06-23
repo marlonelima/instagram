@@ -1,27 +1,19 @@
 import { Request, Response } from 'express'
 
-import { PostsService } from '../../services'
-import { PostsValidator } from '../../validators'
+import PostsService from '../../services/posts.service'
+import PostsValidator from '../../validators/posts.validator'
 import { TokenManager } from '../../utils/token'
 
 import { MyError } from '../../errors'
 
 const PostsController = {
   async create(req: Request, res: Response) {
-    if (!req.headers.authorization)
-      throw new MyError(
-        'Você não tem permissão para isso. O token não foi informado!',
-        401
-      )
-
     await PostsValidator.create.validate(req.body, { abortEarly: false })
 
     if (!req.file)
       throw new MyError('Impossível prosseguir sem uma imagem!', 400)
 
-    const { id: user_id } = await TokenManager.verifyAndDecodeJWT(
-      req.headers.authorization
-    )
+    const { id: user_id } = res.locals.token_payload
 
     const { description } = req.body
 
@@ -46,18 +38,10 @@ const PostsController = {
   },
 
   async delete(req: Request, res: Response) {
-    if (!req.headers.authorization)
-      throw new MyError(
-        'Você não tem permissão para isso. O token não foi informado!',
-        401
-      )
-
     if (!req.headers.post_id)
       throw new MyError('Você não informou o id do post!', 400)
 
-    const { id: user_id } = await TokenManager.verifyAndDecodeJWT(
-      req.headers.authorization
-    )
+    const { id: user_id } = res.locals.token_payload
 
     const post = await PostsService.get(<string>req.headers.post_id)
 

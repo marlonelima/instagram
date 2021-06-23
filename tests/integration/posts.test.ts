@@ -2,7 +2,7 @@ import supertest from 'supertest'
 import faker from 'faker'
 
 import app from '../../src/app'
-import { createPost, signupUser } from '../helpers/create'
+import { signupUser } from '../helpers/create'
 
 const api = supertest(app)
 
@@ -12,7 +12,7 @@ describe('Create post', () => {
 
     const response = await api
       .post('/posts')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .field('description', faker.lorem.sentence())
       .attach('file', './tests/fixtures/post_image.png')
 
@@ -25,6 +25,7 @@ describe('Create post', () => {
       .field('description', faker.lorem.sentence())
       .attach('file', './tests/fixtures/post_image.png')
 
+    console.log(response.body)
     expect(response.statusCode).toBe(401)
   })
 
@@ -43,7 +44,7 @@ describe('Create post', () => {
 
     const response = await api
       .post('/posts')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .field('description', faker.lorem.sentence())
 
     expect(response.statusCode).toBe(400)
@@ -56,13 +57,13 @@ describe('Delete post', () => {
 
     const post = await api
       .post('/posts')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .field('description', faker.lorem.sentence())
       .attach('file', './tests/fixtures/post_image.png')
 
     const response = await api
       .delete('/posts')
-      .set({ Authorization: token, post_id: post.body.id })
+      .set({ Authorization: `Bearer ${token}`, post_id: post.body.id })
 
     expect(response.statusCode).toBe(202)
   })
@@ -74,13 +75,16 @@ describe('Delete post', () => {
 
     const post = await api
       .post('/posts')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .field('description', faker.lorem.sentence())
       .attach('file', './tests/fixtures/post_image.png')
 
     const response = await api
       .delete('/posts')
-      .set({ Authorization: secondUserToken, post_id: post.body.id })
+      .set({
+        Authorization: `Bearer ${secondUserToken}`,
+        post_id: post.body.id
+      })
 
     expect(response.statusCode).toBe(401)
   })
@@ -90,7 +94,7 @@ describe('Delete post', () => {
 
     const post = await api
       .post('/posts')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .field('description', faker.lorem.sentence())
       .attach('file', './tests/fixtures/post_image.png')
 
@@ -102,7 +106,9 @@ describe('Delete post', () => {
   it('should not delete the post because is missing the post_id', async () => {
     const { token } = await signupUser(api)
 
-    const response = await api.delete('/posts').set({ Authorization: token })
+    const response = await api
+      .delete('/posts')
+      .set({ Authorization: `Bearer ${token}` })
 
     expect(response.statusCode).toBe(400)
   })
@@ -112,7 +118,7 @@ describe('Delete post', () => {
 
     const response = await api
       .delete('/posts')
-      .set({ Authorization: token, post_id: 'invalid-post-id' })
+      .set({ Authorization: `Bearer ${token}`, post_id: 'invalid-post-id' })
 
     expect(response.statusCode).toBe(404)
   })

@@ -14,7 +14,7 @@ describe('Create comment', () => {
 
     const response = await api
       .post('/comments')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .send({
         post_id,
         comment: faker.lorem.sentence()
@@ -53,7 +53,7 @@ describe('Create comment', () => {
 
     const response = await api
       .post('/comments')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .send({
         comment: faker.lorem.sentence()
       })
@@ -68,7 +68,7 @@ describe('Create comment', () => {
 
     const response = await api
       .post('/comments')
-      .set({ Authorization: token })
+      .set({ Authorization: `Bearer ${token}` })
       .send({
         post_id
       })
@@ -85,7 +85,7 @@ describe('Delete comment', () => {
 
     const response = await api
       .delete('/comments')
-      .set({ Authorization: token, comment_id: comment.id })
+      .set({ Authorization: `Bearer ${token}`, comment_id: comment.id })
 
     expect(response.statusCode).toBe(202)
   })
@@ -96,9 +96,10 @@ describe('Delete comment', () => {
 
     const comment = await createComment(api, token)
 
-    const response = await api
-      .delete('/comments')
-      .set({ Authorization: secondUserToken, comment_id: comment.id })
+    const response = await api.delete('/comments').set({
+      Authorization: `Bearer ${secondUserToken}`,
+      comment_id: comment.id
+    })
 
     expect(response.statusCode).toBe(401)
   })
@@ -108,7 +109,10 @@ describe('Delete comment', () => {
 
     const response = await api
       .delete('/comments')
-      .set({ Authorization: token, comment_id: 'invalid-comment-id' })
+      .set({
+        Authorization: `Bearer ${token}`,
+        comment_id: 'invalid-comment-id'
+      })
 
     expect(response.statusCode).toBe(404)
   })
@@ -124,7 +128,9 @@ describe('Delete comment', () => {
   it('should not delete the comment because is missing the comment_id', async () => {
     const { token } = await signupUser(api)
 
-    const response = await api.delete('/comments').set({ Authorization: token })
+    const response = await api
+      .delete('/comments')
+      .set({ Authorization: `Bearer ${token}` })
 
     expect(response.statusCode).toBe(400)
   })

@@ -6,6 +6,7 @@ module.exports = {
     coveragePathIgnorePatterns: [
         '<rootDir>/src/config',
         '<rootDir>/src/server.ts',
+        '<rootDir>/src/app.ts',
         '<rootDir>/src/errors/index.ts'
     ]
 }
