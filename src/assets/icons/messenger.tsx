@@ -7,7 +7,7 @@ interface IProps {
 
 function SvgComponent({ theme }: IProps) {
   return (
-    <Svg width={30} height={32} viewBox="0 0 45 46" fill="none">
+    <Svg width={26} height={26} viewBox="0 0 45 46" fill="none">
       <Path
         d="M10 36.5l-1.974 6.318a1 1 0 001.187 1.27L20 41.5"
         stroke="#fff"
