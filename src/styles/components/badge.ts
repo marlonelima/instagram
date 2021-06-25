@@ -10,20 +10,20 @@ export const styles = EStyleSheet.create({
     width: '4.8rem'
   },
   storyPhoto: {
-    width: '4.6rem',
-    height: '4.6rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
     borderRadius: '2.4rem',
-    maxWidth: 70,
-    maxHeight: 70,
+    maxWidth: 75,
+    maxHeight: 75,
     backgroundColor: '#000'
   },
+  newStoryCircle: { width: '4.4rem', height: '4.4rem' },
+  oldStoryCircle: { width: '4.55rem', height: '4.5rem' },
+  containerPhoto: { height: '4.6rem', width: '4.7rem' },
   newStory: {
-    height: '4.6rem',
-    width: '4.7rem',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '2.4rem'

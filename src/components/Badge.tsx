@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
-  TouchableOpacity,
+  Pressable,
   View,
   Image,
   Text,
-  ImageSourcePropType
+  ImageSourcePropType,
+  Alert
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import { styles } from '../styles/components/badge'
 
 import AddStoryIcon from '../assets/icons/add_story'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  Easing,
+  interpolate,
+  Extrapolate,
+  withSpring
+} from 'react-native-reanimated'
 
 interface IProps {
+  haveMyStory?: boolean
   me: boolean
   newStory: boolean
   username?: string
@@ -20,27 +31,64 @@ interface IProps {
 }
 
 export const Badge = (props: IProps) => {
-  return (
-    <TouchableOpacity style={styles.story}>
-      <LinearGradient
-        style={styles.newStory}
-        colors={
-          props.newStory
-            ? ['#e78428', '#a50303']
-            : ['rgba(0,0,0,0)', 'rgba(0,0,0,0)']
-        }
-        useAngle={true}
-        angle={30}
-      >
-        <View style={[styles.storyPhoto]}>
-          <Image source={props.image} style={styles.storiesPerson} />
-          {props.me && <AddStoryIcon style={styles.storiesAddIcon} />}
-        </View>
-      </LinearGradient>
+  const size = useSharedValue(1)
 
-      <Text style={styles.storyName}>
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          scale: size.value
+        }
+      ]
+    }
+  })
+
+  function onPress() {
+    size.value = withTiming(0.95, {
+      duration: 50,
+      easing: Easing.in(Easing.linear)
+    })
+  }
+
+  function onPressOut() {
+    size.value = withTiming(1, {
+      duration: 50,
+      easing: Easing.in(Easing.linear)
+    })
+  }
+
+  return (
+    <Pressable onPressIn={onPress} onPressOut={onPressOut} style={styles.story}>
+      <Animated.View style={[styles.containerPhoto, animatedStyles]}>
+        <LinearGradient
+          style={styles.newStory}
+          colors={
+            props.newStory
+              ? ['#e78428', '#a50303']
+              : props.me && !props.haveMyStory
+              ? ['rgba(0,0,0,0)', 'rgba(0,0,0,0)']
+              : ['#808080', '#808080']
+          }
+          useAngle={true}
+          angle={30}
+        >
+          <View
+            style={[
+              styles.storyPhoto,
+              props.newStory ? styles.newStoryCircle : styles.oldStoryCircle
+            ]}
+          >
+            <Image source={props.image} style={[styles.storiesPerson]} />
+            {props.me && !props.haveMyStory && (
+              <AddStoryIcon style={styles.storiesAddIcon} />
+            )}
+          </View>
+        </LinearGradient>
+      </Animated.View>
+
+      <Text style={{ ...styles.storyName }}>
         {props.me ? 'Seu story' : props.username}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   )
 }

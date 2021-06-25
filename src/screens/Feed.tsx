@@ -31,7 +31,12 @@ export const Feed = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            <Badge image={MeImage} me={true} newStory={false} />
+            <Badge
+              haveMyStory={false}
+              image={MeImage}
+              me={true}
+              newStory={false}
+            />
             <Badge
               image={MeImage}
               me={false}

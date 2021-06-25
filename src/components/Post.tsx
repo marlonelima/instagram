@@ -1,10 +1,13 @@
 import React from 'react'
 import { Image, View, Text } from 'react-native'
+
 import { styles } from '../styles/components/post'
+
 import profileImage from '../assets/images/profile/me.jpg'
-import postImage from '../assets/images/profile/me.jpg'
+import postImage from '../assets/images/posts/me.jpg'
 import MoreIcon from '../assets/icons/more'
-import AutoHeightImage from 'react-native-auto-height-image'
+
+import { getImageHeight } from '../utils/image'
 
 export const Post = () => {
   return (
@@ -14,7 +17,14 @@ export const Post = () => {
         <Text style={styles.username}>me.marlone</Text>
         <MoreIcon style={styles.moreIcon} theme={'dark'} />
       </View>
-      <Image style={styles.postImage} source={postImage} />
+      <View
+        style={{
+          width: '100%',
+          height: getImageHeight(postImage)
+        }}
+      >
+        <Image style={styles.postImage} source={postImage} />
+      </View>
     </View>
   )
 }

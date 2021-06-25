@@ -8,7 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import { Theme } from './constants/Theme'
 import { styles } from './styles/app'
 
-import { Feed } from './screens/Feed'
+import { Main } from './screens/Main'
 
 const App = () => {
   useEffect(() => Splash.hide())
@@ -17,7 +17,7 @@ const App = () => {
     <>
       <StatusBar translucent={false} backgroundColor={Theme.dark.statusBar} />
       <SafeAreaView style={styles.background}>
-        <Feed />
+        <Main />
       </SafeAreaView>
     </>
   )

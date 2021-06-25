@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 export const styles = EStyleSheet.create({
@@ -7,7 +8,7 @@ export const styles = EStyleSheet.create({
   },
   header: {
     width: '100%',
-    paddingHorizontal: '7%',
+    paddingHorizontal: '4%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
@@ -24,5 +25,11 @@ export const styles = EStyleSheet.create({
     fontWeight: 'bold'
   },
   moreIcon: { marginLeft: 'auto', marginRight: 10 },
-  postImage: { width: '100%', aspectRatio: 1, height: null, marginTop: 10 }
+  postImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain',
+    margin: 5
+  }
 })
