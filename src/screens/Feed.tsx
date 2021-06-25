@@ -23,7 +23,7 @@ export const Feed = () => {
           <MessengerIcon theme="dark" />
         </View>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <ScrollView
             style={styles.stories}

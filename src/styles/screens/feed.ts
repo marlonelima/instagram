@@ -15,7 +15,8 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: 'auto',
-    width: '40%'
+    width: '40%',
+    maxWidth: 130
   },
   stories: {
     width: '100%',
