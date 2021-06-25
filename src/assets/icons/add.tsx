@@ -7,7 +7,7 @@ interface IProps {
 
 function SvgComponent({ theme }: IProps) {
   return (
-    <Svg width={26} height={26} viewBox="0 0 46 46" fill="none">
+    <Svg width={23} height={23} viewBox="0 0 46 46" fill="none">
       <Rect
         x={2}
         y={2}
