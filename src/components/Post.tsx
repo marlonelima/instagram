@@ -40,7 +40,7 @@ export const Post = () => {
       </View>
       <View style={styles.info}>
         <Text style={styles.description}>
-          <Text style={styles.usernameDescription}>me.marlone {'  '}</Text>
+          <Text style={styles.usernameDescription}>me.marlone </Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada,
           velit in sodales imperdiet, dui mauris posuere lorem, et maximus nisi
           ante et augue.
