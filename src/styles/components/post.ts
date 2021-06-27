@@ -30,5 +30,39 @@ export const styles = EStyleSheet.create({
     height: null,
     resizeMode: 'contain',
     margin: 5
+  },
+  reaction: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: `4%`,
+    marginTop: 10
+  },
+  reactionLeft: {
+    width: `40%`,
+    maxWidth: 110,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  saveIcon: {
+    marginLeft: 'auto'
+  },
+  info: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 5,
+    paddingHorizontal: `2%`
+  },
+  description: {
+    fontSize: '0.9rem',
+    color: '#fff',
+    marginLeft: 8
+  },
+  usernameDescription: {
+    fontSize: '0.9rem',
+    color: '#fff',
+    paddingRight: 15,
+    fontWeight: 'bold'
   }
 })
