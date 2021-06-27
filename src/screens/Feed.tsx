@@ -77,6 +77,7 @@ export const Feed = () => {
               onScrollEndDrag={bounceEnd}
               showsVerticalScrollIndicator={false}
               style={bounceStyle}
+              bounces={false}
             >
               <PanGestureHandler
                 onGestureEvent={(gesture) => {

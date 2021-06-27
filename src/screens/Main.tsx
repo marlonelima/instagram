@@ -1,8 +1,8 @@
 import React from 'react'
-
-import { Feed } from './Feed'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+import { Feed } from './Feed'
 import { Theme } from '../constants/Theme'
 import HomeIcon from '../assets/icons/home'
 import SearchIcon from '../assets/icons/search'

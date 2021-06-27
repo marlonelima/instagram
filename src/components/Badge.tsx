@@ -1,26 +1,18 @@
-import React, { useEffect } from 'react'
-import {
-  Pressable,
-  View,
-  Image,
-  Text,
-  ImageSourcePropType,
-  Alert
-} from 'react-native'
+import React from 'react'
+
+import { Pressable, View, Image, Text, ImageSourcePropType } from 'react-native'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  Easing
+} from 'react-native-reanimated'
+
 import LinearGradient from 'react-native-linear-gradient'
 
 import { styles } from '../styles/components/badge'
 
 import AddStoryIcon from '../assets/icons/add_story'
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  Easing,
-  interpolate,
-  Extrapolate,
-  withSpring
-} from 'react-native-reanimated'
 
 interface IProps {
   haveMyStory?: boolean
