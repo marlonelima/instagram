@@ -1,15 +1,16 @@
 import React, { useRef } from 'react'
 import {
   View,
-  ScrollView,
   GestureResponderEvent,
   NativeSyntheticEvent,
-  NativeScrollEvent
+  NativeScrollEvent,
+  ScrollView
 } from 'react-native'
 
 import {
   PanGestureHandler,
-  NativeViewGestureHandler
+  NativeViewGestureHandler,
+  ScrollView as GestureScrollView
 } from 'react-native-gesture-handler'
 
 import Animated, {
@@ -36,9 +37,8 @@ import { useState } from 'react'
 export const Feed = () => {
   const panRef = useRef(null)
   const viewRef = useRef(null)
-  const storiesRef = useRef(null)
 
-  const [shouldBounce, setShouldBounce] = useState(false)
+  const [enableBounceControl, setEnableBounceControl] = useState(true)
 
   const bounceY = useSharedValue(0)
 
@@ -53,12 +53,11 @@ export const Feed = () => {
     }
   })
 
-  function defineIfShouldBounce(
-    event: NativeSyntheticEvent<NativeScrollEvent>
-  ) {
-    if (event.nativeEvent.contentOffset.y <= 20) return setShouldBounce(true)
-    if (event.nativeEvent.contentOffset.y > 20 && shouldBounce)
-      return setShouldBounce(false)
+  function detectScrollOnTop(event: NativeSyntheticEvent<NativeScrollEvent>) {
+    if (event.nativeEvent.contentOffset.y <= 20)
+      return setEnableBounceControl(true)
+    if (event.nativeEvent.contentOffset.y > 20 && enableBounceControl)
+      return setEnableBounceControl(false)
   }
 
   function bounceEnd() {
@@ -84,68 +83,59 @@ export const Feed = () => {
 
         <PanGestureHandler
           onGestureEvent={(gesture) => {
-            shouldBounce &&
-              (bounceY.value = gesture.nativeEvent.translationY / 2)
+            bounceY.value = gesture.nativeEvent.translationY / 2
           }}
           ref={panRef}
           simultaneousHandlers={viewRef}
+          enabled={enableBounceControl}
+          shouldCancelWhenOutside
+          onCancelled={bounceEnd}
         >
           <NativeViewGestureHandler ref={viewRef}>
             <Animated.ScrollView
-              onScroll={defineIfShouldBounce}
+              onScroll={detectScrollOnTop}
               onScrollEndDrag={bounceEnd}
               showsVerticalScrollIndicator={false}
-              style={bounceStyle}
               bounces={false}
+              style={bounceStyle}
             >
-              <PanGestureHandler
-                onGestureEvent={(gesture) => {
-                  bounceY.value = gesture.nativeEvent.translationY / 2
-                }}
-                onEnded={bounceEnd}
-                ref={panRef}
-                simultaneousHandlers={storiesRef}
+              <GestureScrollView
+                style={styles.stories}
+                contentContainerStyle={styles.storiesInset}
+                horizontal
+                showsHorizontalScrollIndicator={false}
               >
-                <NativeViewGestureHandler ref={storiesRef}>
-                  <ScrollView
-                    style={styles.stories}
-                    contentContainerStyle={styles.storiesInset}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                  >
-                    <Badge
-                      haveMyStory={false}
-                      image={MeImage}
-                      me={true}
-                      newStory={false}
-                    />
-                    <Badge
-                      image={MeImage}
-                      me={false}
-                      newStory={true}
-                      username="me.marlone"
-                    />
-                    <Badge
-                      image={MeImage}
-                      me={false}
-                      newStory={true}
-                      username="me.marlone"
-                    />
-                    <Badge
-                      image={MeImage}
-                      me={false}
-                      newStory={false}
-                      username="me.marlone"
-                    />
-                    <Badge
-                      image={MeImage}
-                      me={false}
-                      newStory={false}
-                      username="me.marlone"
-                    />
-                  </ScrollView>
-                </NativeViewGestureHandler>
-              </PanGestureHandler>
+                <Badge
+                  haveMyStory={false}
+                  image={MeImage}
+                  me={true}
+                  newStory={false}
+                />
+                <Badge
+                  image={MeImage}
+                  me={false}
+                  newStory={true}
+                  username="me.marlone"
+                />
+                <Badge
+                  image={MeImage}
+                  me={false}
+                  newStory={true}
+                  username="me.marlone"
+                />
+                <Badge
+                  image={MeImage}
+                  me={false}
+                  newStory={false}
+                  username="me.marlone"
+                />
+                <Badge
+                  image={MeImage}
+                  me={false}
+                  newStory={false}
+                  username="me.marlone"
+                />
+              </GestureScrollView>
 
               <Post />
               <Post />
