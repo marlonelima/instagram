@@ -3,7 +3,7 @@ import { SafeAreaView, StatusBar } from 'react-native'
 
 import Splash from 'react-native-splash-screen'
 
-import EStyleSheet from 'react-native-extended-stylesheet'
+import EStyleSheet from 'react-native-redesign'
 
 import { Theme } from './constants/Theme'
 import { styles } from './styles/app'

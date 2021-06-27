@@ -5398,14 +5398,6 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-extended-stylesheet@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/react-native-extended-stylesheet/-/react-native-extended-stylesheet-0.12.0.tgz#ebacf22d78a8e2173bdef2a08cbf1acba4dc051f"
-  integrity sha512-y4MEI+a9F8qtAKEjxKbwqotJg1FqKfl6vaiF25ULZ/VGkWI4GNTnsFunU9x6B3XJ6ly1E8O9fybO63u6UazL/A==
-  dependencies:
-    css-mediaquery "^0.1.2"
-    object-resolve-path "^1.1.0"
-
 react-native-gesture-handler@^1.10.3:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz#942bbf2963bbf49fa79593600ee9d7b5dab3cfc0"
@@ -5436,6 +5428,14 @@ react-native-reanimated@^2.2.0:
     fbjs "^3.0.0"
     mockdate "^3.0.2"
     string-hash-64 "^1.0.3"
+
+react-native-redesign@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-redesign/-/react-native-redesign-0.1.1.tgz#6e8102565835ead48065777ef7afab41899c23e3"
+  integrity sha512-+QAyf190cWTXj6cjysvlbjWCXj9ndLb/0TKBzNzWWHxm/fioMDTVEsPckD9G5wA+I7OI6mSRWl7Fer1mQjOYCA==
+  dependencies:
+    css-mediaquery "^0.1.2"
+    object-resolve-path "^1.1.0"
 
 react-native-safe-area-context@^3.2.0:
   version "3.2.0"

@@ -1,4 +1,4 @@
-import EStyleSheet from 'react-native-extended-stylesheet'
+import EStyleSheet from 'react-native-redesign'
 
 import { Theme } from './../constants/Theme'
 

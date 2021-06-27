@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native'
-import EStyleSheet from 'react-native-extended-stylesheet'
+import EStyleSheet from 'react-native-redesign'
 
 export const styles = EStyleSheet.create({
   post: {
