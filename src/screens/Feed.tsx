@@ -1,5 +1,11 @@
 import React, { useRef } from 'react'
-import { View, ScrollView } from 'react-native'
+import {
+  View,
+  ScrollView,
+  GestureResponderEvent,
+  NativeSyntheticEvent,
+  NativeScrollEvent
+} from 'react-native'
 
 import {
   PanGestureHandler,
@@ -25,11 +31,14 @@ import { Badge } from '../components/Badge'
 
 import MeImage from '../assets/images/profile/me.jpg'
 import { Post } from '../components/Post'
+import { useState } from 'react'
 
 export const Feed = () => {
   const panRef = useRef(null)
   const viewRef = useRef(null)
   const storiesRef = useRef(null)
+
+  const [shouldBounce, setShouldBounce] = useState(false)
 
   const bounceY = useSharedValue(0)
 
@@ -43,6 +52,14 @@ export const Feed = () => {
       )
     }
   })
+
+  function defineIfShouldBounce(
+    event: NativeSyntheticEvent<NativeScrollEvent>
+  ) {
+    if (event.nativeEvent.contentOffset.y <= 20) return setShouldBounce(true)
+    if (event.nativeEvent.contentOffset.y > 20 && shouldBounce)
+      return setShouldBounce(false)
+  }
 
   function bounceEnd() {
     bounceY.value = withTiming(0, {
@@ -67,13 +84,15 @@ export const Feed = () => {
 
         <PanGestureHandler
           onGestureEvent={(gesture) => {
-            bounceY.value = gesture.nativeEvent.translationY / 2
+            shouldBounce &&
+              (bounceY.value = gesture.nativeEvent.translationY / 2)
           }}
           ref={panRef}
           simultaneousHandlers={viewRef}
         >
           <NativeViewGestureHandler ref={viewRef}>
             <Animated.ScrollView
+              onScroll={defineIfShouldBounce}
               onScrollEndDrag={bounceEnd}
               showsVerticalScrollIndicator={false}
               style={bounceStyle}
