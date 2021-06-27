@@ -19,7 +19,6 @@ public class MainActivity extends ReactActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-    AppCompatDelegate.
   }
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
