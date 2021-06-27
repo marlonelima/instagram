@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { SafeAreaView, StatusBar } from 'react-native'
 
@@ -6,7 +6,7 @@ import EStyleSheet from 'react-native-redesign'
 
 import { Theme } from './constants/Theme'
 
-import { Main } from './screens/Main'
+import { Main } from './navigation'
 
 const App = () => {
   return (

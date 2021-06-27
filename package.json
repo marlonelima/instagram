@@ -12,6 +12,7 @@
     "dependencies": {
         "@react-native-community/masked-view": "^0.1.11",
         "@react-navigation/bottom-tabs": "^5.11.11",
+        "@react-navigation/material-top-tabs": "^5.3.15",
         "@react-navigation/native": "^5.9.4",
         "react": "17.0.1",
         "react-native": "0.64.1",
@@ -21,7 +22,8 @@
         "react-native-redesign": "^0.1.1",
         "react-native-safe-area-context": "^3.2.0",
         "react-native-screens": "^3.4.0",
-        "react-native-svg": "^12.1.1"
+        "react-native-svg": "^12.1.1",
+        "react-native-tab-view": "^2.16.0"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",

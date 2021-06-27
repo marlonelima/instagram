@@ -38,7 +38,7 @@ export const Feed = () => {
   const panRef = useRef(null)
   const viewRef = useRef(null)
 
-  const [enableBounceControl, setEnableBounceControl] = useState(true)
+  const [enableBounceControl, setEnableBounceControl] = useState(false)
 
   const bounceY = useSharedValue(0)
 
@@ -61,6 +61,7 @@ export const Feed = () => {
   }
 
   function bounceEnd() {
+    setEnableBounceControl(false)
     bounceY.value = withTiming(0, {
       duration: 350,
       easing: Easing.linear
@@ -83,6 +84,9 @@ export const Feed = () => {
 
         <PanGestureHandler
           onGestureEvent={(gesture) => {
+            if (gesture.nativeEvent.velocityX > 150)
+              return setEnableBounceControl(false)
+
             bounceY.value = gesture.nativeEvent.translationY / 2
           }}
           ref={panRef}
